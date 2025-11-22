@@ -65,7 +65,7 @@
           </div>
           <div>
             <p>Filme Favorito:</p> <span id="*"></span>
-            <select name="" id="filme">
+            <select name="" id="filme_select">
               <option value="*" disabled selected>Selecione um filme</option>
               <option value="1">Toy Story 1</option>
               <option value="2">Toy Story 2</option>
@@ -126,8 +126,10 @@
     // Agora vá para o método fetch logo abaixo
     var nomeVar = nome_input.value;
     var sobrenomeVar = sobrenome_input.value;
-    var personagemVar = personagem_input.value;
+    var personagemVar = personagem_select.value;
+    var filmeVar = filme_select.value;
     var emailVar = email_input.value;
+    var dt_nascimentoVar = dt_nascimento_input.value;
     var senhaVar = senha_input.value;
     var confirmacaoSenhaVar = confirmar_input.value;
     // var codigoVar = codigo_input.value;
@@ -142,7 +144,9 @@
       nomeVar == "" ||
       sobrenomeVar == "" ||
       personagemVar == "" ||
+      filmeVar == "" ||
       emailVar == "" ||
+      dt_nascimentoVar == "" ||
       senhaVar == "" ||
       confirmacaoSenhaVar == ""
       // codigoVar == ""
@@ -183,7 +187,9 @@
         nomeServer: nomeVar,
         sobrenomeServer: sobrenomeVar,
         personagemServer: personagemVar,
+        filmeServer: filmeVar,
         emailServer: emailVar,
+        dt_nascimentoServer: dt_nascimentoVar,
         senhaServer: senhaVar,
         // idEmpresaVincularServer: idEmpresaVincular
       }),
