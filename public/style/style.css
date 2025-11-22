@@ -81,7 +81,7 @@ body {
     background-position: center;
     background-attachment: fixed;
     padding: 70px;
-    height: 750px;
+    height: 820px;
 } 
 
 .titulo {
@@ -137,6 +137,17 @@ body {
     width: 350px;
     height: 29px;
     padding-left: 5px;
+    color: gray;
+}
+
+.campos select {
+    border-radius: 3px;
+    border: 0;
+    background-color: #D9D9D9;
+    width: 350px;
+    height: 29px;
+    padding-left: 1px;
+    color: grey;
 }
 
 .campos button {
@@ -331,7 +342,7 @@ body {
 
 .container .parte_cima {
     display: flex;
-    gap: 50px;
+    gap: 30px;
     flex-direction: column;
 }
 
@@ -349,4 +360,11 @@ body {
 
 .container .canvas2 {
     width: 590px;
+}
+
+.dashboard2 .canvas3 {
+    display: flex;
+    width: 590px;
+    margin-left: 30px;
+    margin-bottom: 30px;
 }

@@ -57,6 +57,11 @@
         </div>
     </div>
     </div>
+    <div class="dashboard2">
+        <div class="canvas3">
+            <canvas id="myChart3"></canvas>
+        </div>
+    </div>
     </div>
     </div>
     </div>
@@ -69,13 +74,13 @@
   new Chart(ctx, {
     type: "bar",
     data: {
-      labels: ["Wood", "Buzz", "Jessie", "Rex", "Salsicha", "Sr. Cabeça de Batata", "Sra. Cabeça de Batata", "Bala no Alvo"],
+      labels: ["Wood", "Buzz", "Jessie", "Rex", "Salsicha", "Sr. Cabeça de Batata", "Hamm", "Bala no Alvo"],
       datasets: [
         {
           label: "Personagem Favorito",
           data: [12, 19, 3, 5, 2, 3, 5, 9],
           borderWidth: 1,
-          backgroundColor: ["rgba(255, 0, 0, 0.700)", "rgba(0, 0, 255, 0.700)", "rgba(255, 255, 0, 0.700)", "rgba(0, 128, 0, 0.700)", "rgba(128, 0, 128, 0.700)", "rgba(165, 42, 42, 0.700)", "rgba(255, 192, 203, 0.700)","rgba(139, 0, 0, 0.700)"]
+          backgroundColor: ["rgba(255, 0, 0, 0.700)", "rgba(0, 0, 255, 0.700)", "rgba(255, 255, 0, 0.700)", "rgba(0, 128, 0, 0.700)", "rgba(128, 0, 128, 0.700)", "rgba(165, 42, 42, 0.700)", "rgba(255, 192, 203, 0.800)","rgba(139, 0, 0, 0.700)"]
         }
       ],
     },
@@ -100,6 +105,30 @@
           data: [12, 19, 3, 5],
           borderWidth: 1,
           backgroundColor: ["rgba(255, 0, 0, 0.700)", "rgba(0, 0, 255, 0.700)", "rgba(255, 255, 0, 0.700)", "rgba(0, 128, 0, 0.700)"]
+        }
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+
+  const ctx3 = document.getElementById("myChart3");
+
+  new Chart(ctx3, {
+    type: "bar",
+    data: {
+      labels: ["10 - 18 anos", "18 - 30 anos", "30 ou mais"],
+      datasets: [
+        {
+          label: "Faixa Etária",
+          data: [12, 19, 3],
+          borderWidth: 1,
+          backgroundColor: ["rgba(255, 0, 0, 0.700)", "rgba(0, 0, 255, 0.700)", "rgba(255, 255, 0, 0.700)"]
         }
       ],
     },

@@ -39,7 +39,7 @@
         </div>
         <div class="campos">
           <div>
-            <p>Nome:</p> <span id="*">*</span>
+            <p>Nome:</p> <span id="*"></span>
             <input type="text" id="nome_input" placeholder="Buzz" />
             <br /><br />
           </div>
@@ -50,12 +50,38 @@
           </div>
           <div>
             <p>Personagem Favorito:</p> <span id="*"></span>
-            <input type="text" id="personagem_input" placeholder="Wood" />
+            <select name="" id="personagem_select">
+              <option value="*" disabled selected>Escolha um personagem</option>
+              <option value="wood">Wood</option>
+              <option value="buzz">Buzz</option>
+              <option value="jessie">Jessie</option>
+              <option value="rex">Rex</option>
+              <option value="salsicha">Salsicha</option>
+              <option value="cabeça_de_batata">Sr. Cabeça de Batata</option>
+              <option value="hamm">Hamm</option>
+              <option value="bala_no_alvo">Bala no Alvo</option>
+            </select>
+            <br /><br />
+          </div>
+          <div>
+            <p>Filme Favorito:</p> <span id="*"></span>
+            <select name="" id="filme">
+              <option value="*" disabled selected>Selecione um filme</option>
+              <option value="1">Toy Story 1</option>
+              <option value="2">Toy Story 2</option>
+              <option value="3">Toy Story 3</option>
+              <option value="4">Toy Story 4</option>
+            </select>
             <br /><br />
           </div>
           <div>
             <p>E-mail:</p> <span id="*"></span>
             <input type="text" id="email_input" placeholder="buzz@gmail.com" />
+            <br /><br />
+          </div>
+          <div>
+            <p>Data de Nascimento:</p> <span id="*"></span>
+            <input type="date" id="dt_nascimento_input" placeholder="22/12/1995" />
             <br /><br />
           </div>
           <div>
