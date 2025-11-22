@@ -223,3 +223,99 @@ body {
     margin-right: 60px;
     gap: 20px;
 }
+
+/* Início Dashboard */
+
+.navbar_dash {
+    display: flex;
+    background-color: #889CB4;
+    width: 150px;
+}
+
+.navbar_dash .campos {
+    display: flex;
+    gap: 110px;
+    margin-left: 10px;
+    height: 730px;
+    align-items: center;
+    text-align: center;
+}
+
+.navbar_dash .campos a {
+    text-decoration: none;
+    color: black;
+    margin-bottom: 20px;
+}
+
+.navbar_dash .campos1 {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    height: 500px;
+    align-items: center;
+}
+
+.navbar_dash .perfil div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    border-radius: 100%;
+    color: white;
+    width: 65px;
+    height: 65px;
+    font-size: 20px;
+}
+
+.campos1 .bem_vindo {
+    font-weight: bold;
+}
+
+.container {
+    display: flex;
+}
+
+.container .dash {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 30px;
+}
+
+.container .titulo {
+    display: flex;
+    font-size: 60px;
+    justify-content: center;
+    padding-top: 35px;
+}
+
+.dashboard {
+    display: flex;
+    margin-left: 20px;
+    margin-right: 20px;
+    color: rgba(255, 192, 203, 0.704);
+    flex-direction: row;
+    gap: 70px;
+}
+
+.container .parte_cima {
+    display: flex;
+    gap: 50px;
+    flex-direction: column;
+}
+
+.dashboard .dash1 {
+    display: flex;
+}
+
+.container .canvas {
+    width: 650px;
+}
+
+.dashboard .dash2 {
+    display: flex;
+}
+
+.container .canvas2 {
+    width: 590px;
+}

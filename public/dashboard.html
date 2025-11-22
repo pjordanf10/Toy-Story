@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Toy Story</title>
+    <link rel="stylesheet" href="style/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="container">
+    <div class="navbar_dash">
+      <div class="campos">
+        <div class="campos1">
+          <div class="perfil">
+            <div>B</div>
+          </div>
+          <div class="bem_vindo">Bem-vindo</div>
+          <div class="seu_espaco">
+            <a href="">Seu espaço</a>
+          </div>
+          <div class="quiz">
+            <a href="">Quiz</a>
+          </div>
+        </div>
+        <div class="sair">
+          <a href="">Log Out</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="dash">
+    <div class="parte_cima">
+    <div class="titulo">
+        Sua Dashboard
+    </div>
+
+    <div class="kpi">
+
+    </div>
+
+    <div class="dashboard">
+    <div class="dash1">
+        <div class="canvas">
+      <canvas id="myChart"></canvas>
+        </div>
+    </div>
+    <div class="dash2">
+        <div class="canvas2">
+            <canvas id="myChart2"></canvas>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  const ctx = document.getElementById("myChart");
+
+  new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: ["Wood", "Buzz", "Jessie", "Rex", "Salsicha", "Sr. Cabeça de Batata", "Sra. Cabeça de Batata", "Bala no Alvo"],
+      datasets: [
+        {
+          label: "Personagem Favorito",
+          data: [12, 19, 3, 5, 2, 3, 5, 9],
+          borderWidth: 1,
+          backgroundColor: ["rgba(255, 0, 0, 0.700)", "rgba(0, 0, 255, 0.700)", "rgba(255, 255, 0, 0.700)", "rgba(0, 128, 0, 0.700)", "rgba(128, 0, 128, 0.700)", "rgba(165, 42, 42, 0.700)", "rgba(255, 192, 203, 0.700)","rgba(139, 0, 0, 0.700)"]
+        }
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+
+  const ctx2 = document.getElementById("myChart2");
+
+  new Chart(ctx2, {
+    type: "bar",
+    data: {
+      labels: ["Toy Story 1", "Toy Story 2", "Toy Story 3", "Toy Story 4"],
+      datasets: [
+        {
+          label: "Filme Favorito",
+          data: [12, 19, 3, 5],
+          borderWidth: 1,
+          backgroundColor: ["rgba(255, 0, 0, 0.700)", "rgba(0, 0, 255, 0.700)", "rgba(255, 255, 0, 0.700)", "rgba(0, 128, 0, 0.700)"]
+        }
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+</script>
