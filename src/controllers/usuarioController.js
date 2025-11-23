@@ -54,10 +54,10 @@ function cadastrar(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var nome = req.body.nomeServer;
     var sobrenome = req.body.sobrenomeServer;
-    var personagem = req.body.personagemServer;
-    var filme = req.body.filmeServer;
+    var fk_personagem_favorito = req.body.personagemServer;
+    var fk_filme = req.body.filmeServer;
     var email = req.body.emailServer;
-    var dt_nascimento = req.body.dt_nascimentoServer;
+    var data_nascimento = req.body.dt_nascimentoServer;
     var senha = req.body.senhaServer;
     // var fkEmpresa = req.body.idEmpresaVincularServer;
 
@@ -66,13 +66,13 @@ function cadastrar(req, res) {
         res.status(400).send("Seu nome está undefined!");
     } else if (sobrenome == undefined) {
         res.status(400).send("Seu sobrenome está undefined!");
-    } else if (personagem == undefined) {
+    } else if (fk_personagem_favorito == undefined) {
         res.status(400).send("Seu personagem está undefined!");
-    } else if (filme == undefined) {
+    } else if (fk_filme == undefined) {
         res.status(400).send("Seu filme está undefined!");
     } else if (email == undefined) {
         res.status(400).send("Seu email está undefined!");
-    } else if (dt_nascimento == undefined) {
+    } else if (data_nascimento == undefined) {
         res.status(400).send("Sua data de nascimento está undefined!");
     } else if (senha == undefined) {
         res.status(400).send("Sua senha está undefined!");
@@ -83,7 +83,7 @@ function cadastrar(req, res) {
     else {
 
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrar(nome, sobrenome, personagem, filme, email, dt_nascimento, senha)
+        usuarioModel.cadastrar(nome, sobrenome, fk_personagem_favorito, fk_filme, email, data_nascimento, senha)
             .then(
                 function (resultado) {
                     res.json(resultado);

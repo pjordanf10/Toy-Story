@@ -13,157 +13,344 @@
     />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
-  <body>
+  <body onload="exibirDash()">
     <div class="container">
-    <div class="navbar_dash">
-      <div class="campos">
-        <div class="campos1">
-          <div class="perfil">
-            <div>B</div>
+      <div class="navbar_dash">
+        <div class="campos">
+          <div class="campos1">
+            <div class="perfil">
+              <div>B</div>
+            </div>
+            <div class="bem_vindo">Bem-vindo
+              <span id="boas_vindas"></span>
+            </div>
+            <div class="seu_espaco">
+              <a href="">Seu espaço</a>
+            </div>
+            <div class="quiz">
+              <a href="">Quiz</a>
+            </div>
           </div>
-          <div class="bem_vindo">Bem-vindo</div>
-          <div class="seu_espaco">
-            <a href="">Seu espaço</a>
+          <div class="sair">
+            <a href="">Log Out</a>
           </div>
-          <div class="quiz">
-            <a href="">Quiz</a>
-          </div>
-        </div>
-        <div class="sair">
-          <a href="">Log Out</a>
         </div>
       </div>
-    </div>
 
-    <div class="dash">
-    <div class="parte_cima">
-    <div class="titulo">
-        Sua Dashboard
-    </div>
+      <div class="dash">
+        <div class="parte_cima">
+          <div class="titulo">Sua Dashboard</div>
 
-    <div class="kpi">
+          <div class="kpi">
+            <span id="kpi1">
+              
+            </span>
+            <span id="kpi2">
 
-    </div>
+            </span>
+            <span id="kpi3">
 
-    <div class="dashboard">
-    <div class="dash1">
-        <div class="canvas">
-      <canvas id="myChart"></canvas>
+            </span>
+          </div>
+
+          <div class="dashboard">
+            <div class="dash1">
+              <div class="canvas">
+                <canvas id="myChart"></canvas>
+              </div>
+            </div>
+            <div class="dash2">
+              <div class="canvas2">
+                <canvas id="myChart2"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="dashboard2">
+            <div class="canvas3">
+              <canvas id="myChart3"></canvas>
+            </div>
+          </div>
         </div>
-    </div>
-    <div class="dash2">
-        <div class="canvas2">
-            <canvas id="myChart2"></canvas>
-        </div>
-    </div>
-    </div>
-    <div class="dashboard2">
-        <div class="canvas3">
-            <canvas id="myChart3"></canvas>
-        </div>
-    </div>
-    </div>
-    </div>
+      </div>
     </div>
   </body>
 </html>
 
 <script>
-  const ctx = document.getElementById("myChart");
 
-  new Chart(ctx, {
-    type: "bar",
-    data: {
-      labels: ["Wood", "Buzz", "Jessie", "Rex", "Salsicha", "Sr. Cabeça de Batata", "Hamm", "Bala no Alvo"],
-      datasets: [
-        {
-          label: "Personagem Favorito",
-          data: [12, 19, 3, 5, 2, 3, 5, 9],
-          borderWidth: 1,
-          backgroundColor: ["rgba(255, 0, 0, 0.700)", "rgba(0, 0, 255, 0.700)", "rgba(255, 255, 0, 0.700)", "rgba(0, 128, 0, 0.700)", "rgba(128, 0, 128, 0.700)", "rgba(165, 42, 42, 0.700)", "rgba(255, 192, 203, 0.800)","rgba(139, 0, 0, 0.700)"]
+  function exibirDash() {
+    obterDadosGrafico()
+    obterDadosGrafico2()
+    obterDadosGrafico3()
+    obterDadosGrafico_kpi()
+  }
+
+  boas_vindas.innerHTML = sessionStorage.NOME_USUARIO;
+
+  // O gráfico é construído com três funções:
+  // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
+  // 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
+  // 3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
+
+  // Esta função *obterDadosGrafico* busca os últimos dados inseridos em tabela de medidas.
+  // para, quando carregar o gráfico da primeira vez, já trazer com vários dados.
+  // A função *obterDadosGrafico* também invoca a função *plotarGrafico*
+
+  //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
+  //     Para ajustar o "select", ajuste o comando sql em src/models
+
+  function obterDadosGrafico() {
+    fetch(`/dash/personagem`, { cache: "no-store" })
+      .then(function (response) {
+        if (response.ok) {
+          response.json().then(function (resposta) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+            resposta.reverse();
+            console.log(resposta)
+            plotarGrafico(resposta);
+          });
+        } else {
+          console.error("Nenhum dado encontrado ou erro na API");
         }
-      ],
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true,
-        },
-      },
-    },
-  });
+      })
+      .catch(function (error) {
+        console.error(
+          `Erro na obtenção dos dados p/ gráfico: ${error.message}`
+        );
+      });
+  }
 
-  const ctx2 = document.getElementById("myChart2");
+  // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
+  // Configura o gráfico (cores, tipo, etc), materializa-o na página e,
+  // A função *plotarGrafico* também invoca a função *atualizarGrafico*
+  function plotarGrafico(resposta) {
+    console.log("iniciando plotagem do gráfico...");
 
-  new Chart(ctx2, {
-    type: "bar",
-    data: {
-      labels: ["Toy Story 1", "Toy Story 2", "Toy Story 3", "Toy Story 4"],
-      datasets: [
-        {
-          label: "Filme Favorito",
-          data: [12, 19, 3, 5],
-          borderWidth: 1,
-          backgroundColor: ["rgba(255, 0, 0, 0.700)", "rgba(0, 0, 255, 0.700)", "rgba(255, 255, 0, 0.700)", "rgba(0, 128, 0, 0.700)"]
-        }
-      ],
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true,
-        },
-      },
-    },
-  });
+    // Criando estrutura para plotar gráfico - dados
 
-  const ctx3 = document.getElementById("myChart3");
+    console.log("----------------------------------------------");
+    console.log(
+      'Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":'
+    );
+    console.log(resposta);
 
-  new Chart(ctx3, {
-    type: "bar",
-    data: {
-      labels: ["10 - 18 anos", "18 - 30 anos", "30 ou mais"],
-      datasets: [
-        {
-          label: "Faixa Etária",
-          data: [12, 19, 3],
-          borderWidth: 1,
-          backgroundColor: ["rgba(255, 0, 0, 0.700)", "rgba(0, 0, 255, 0.700)", "rgba(255, 255, 0, 0.700)"]
-        }
-      ],
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true,
-        },
-      },
-    },
-  });
+    var listaValores = [];
+    var listaNome = [];
 
-  function obterDadosGrafico(idAquario) {
-
-        alterarTitulo(idAquario)
-
-        if (proximaAtualizacao != undefined) {
-            clearTimeout(proximaAtualizacao);
-        }
-
-        fetch(`/medidas/ultimas/${idAquario}`, { cache: 'no-store' }).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (resposta) {
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    resposta.reverse();
-
-                    plotarGrafico(resposta, idAquario);
-
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
+    // Inserindo valores recebidos em estrutura para plotar o gráfico
+    for (var i = 0; i < resposta.length; i++) {
+      var registro = resposta[i];
+      listaValores.push(registro.total);
+      listaNome.push(registro.nome);
     }
+
+    const myChart = document.getElementById("myChart");
+    new Chart(myChart, {
+      type: "bar",
+      data: {
+        labels: listaNome,
+      datasets: [{
+          label: "Personagem Favorito",
+          data: listaValores,
+          borderWidth: 1,
+          backgroundColor: [
+            "rgba(255, 0, 0, 0.700)",
+            "rgba(0, 0, 255, 0.700)",
+            "rgba(255, 255, 0, 0.700)",
+            "rgba(0, 128, 0, 0.700)",
+            "rgba(128, 0, 128, 0.700)",
+            "rgba(165, 42, 42, 0.700)",
+            "rgba(255, 192, 203, 0.800)",
+            "rgba(139, 0, 0, 0.700)",
+          ]
+        }]
+      }
+    });
+  }
+
+  // Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
+  // buscando a última medida inserida em tabela contendo as capturas,
+
+  //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
+  //     Para ajustar o "select", ajuste o comando sql em src/models
+
+  function obterDadosGrafico2() {
+    fetch(`/dash/filme`, { cache: "no-store" })
+      .then(function (response) {
+        if (response.ok) {
+          response.json().then(function (resposta) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+            resposta.reverse();
+            console.log(resposta)
+            plotarGrafico2(resposta);
+          });
+        } else {
+          console.error("Nenhum dado encontrado ou erro na API");
+        }
+      })
+      .catch(function (error) {
+        console.error(
+          `Erro na obtenção dos dados p/ gráfico: ${error.message}`
+        );
+      });
+  }
+
+  function plotarGrafico2(resposta) {
+    console.log("iniciando plotagem do gráfico...");
+
+    // Criando estrutura para plotar gráfico - dados
+
+    console.log("----------------------------------------------");
+    console.log(
+      'Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":'
+    );
+    console.log(resposta);
+
+    var listaValores = [];
+    var listaNome = [];
+
+    // Inserindo valores recebidos em estrutura para plotar o gráfico
+    for (var i = 0; i < resposta.length; i++) {
+      var registro = resposta[i];
+      listaValores.push(registro.total);
+      listaNome.push(registro.nome);
+    }
+
+    const myChart2 = document.getElementById("myChart2");
+    new Chart(myChart2, {
+      type: "bar",
+      data: {
+        labels: listaNome,
+      datasets: [{
+          label: "Filme Favorito",
+          data: listaValores,
+          borderWidth: 1,
+          backgroundColor: [
+            "rgba(255, 0, 0, 0.700)",
+            "rgba(0, 0, 255, 0.700)",
+            "rgba(255, 255, 0, 0.700)",
+            "rgba(0, 128, 0, 0.700)",
+          ]
+        }]
+      }
+    });
+  }
+
+  function obterDadosGrafico3() {
+    fetch(`/dash/idade`, { cache: "no-store" })
+      .then(function (response) {
+        if (response.ok) {
+          response.json().then(function (resposta) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+            resposta.reverse();
+            console.log(resposta)
+            plotarGrafico3(resposta);
+          });
+        } else {
+          console.error("Nenhum dado encontrado ou erro na API");
+        }
+      })
+      .catch(function (error) {
+        console.error(
+          `Erro na obtenção dos dados p/ gráfico: ${error.message}`
+        );
+      });
+  }
+
+  function plotarGrafico3(resposta) {
+    console.log("iniciando plotagem do gráfico...");
+
+    // Criando estrutura para plotar gráfico - dados
+
+    console.log("----------------------------------------------");
+    console.log(
+      'Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":'
+    );
+    console.log(resposta);
+
+    var listaValores = [];
+    var listaFaixa = [];
+
+    // Inserindo valores recebidos em estrutura para plotar o gráfico
+    for (var i = 0; i < resposta.length; i++) {
+      var registro = resposta[i];
+      listaValores.push(registro.Quantidade);
+      listaFaixa.push(registro.faixa);
+    }
+
+    const myChart3 = document.getElementById("myChart3");
+    new Chart(myChart3, {
+      type: "bar",
+      data: {
+        labels: listaFaixa,
+      datasets: [{
+          label: "Faixa Etária",
+          data: listaValores,
+          borderWidth: 1,
+          backgroundColor: [
+            "rgba(255, 0, 0, 0.700)",
+            "rgba(0, 0, 255, 0.700)",
+            "rgba(255, 255, 0, 0.700)",
+            "rgba(0, 128, 0, 0.700)",
+          ]
+        }]
+      }
+    });
+  }
+
+  function obterDadosGrafico_kpi() {
+    fetch(`/dash/kpi_filme`, { cache: "no-store" })
+      .then(function (response) {
+        if (response.ok) {
+          response.json().then(function (resposta) {
+            console.log(`Dados recebidos: kpi filme`, resposta);
+            var kpi_1 = resposta[0].nome
+            kpi1.innerHTML = kpi_1; 
+          });
+        } else {
+          console.error("Nenhum dado encontrado ou erro na API da kpi 1");
+        }
+      })
+      .catch(function (error) {
+        console.error(
+          `Erro na obtenção dos dados p/ gráfico: ${error.message}`
+        );
+      });
+
+    fetch(`/dash/kpi_personagem`, { cache: "no-store" })
+      .then(function (response) {
+        if (response.ok) {
+          response.json().then(function (resposta) {
+            console.log(`Dados recebidos: kpi personagem`, resposta);
+            var kpi_2 = resposta[0].nome
+            kpi2.innerHTML = kpi_2;
+          });
+        } else {
+          console.error("Nenhum dado encontrado ou erro na API da kpi 2");
+        }
+      })
+      .catch(function (error) {
+        console.error(
+          `Erro na obtenção dos dados p/ gráfico: ${error.message}`
+        );
+      });
+
+    fetch(`/dash/kpi_faixa`, { cache: "no-store" })
+      .then(function (response) {
+        if (response.ok) {
+          response.json().then(function (resposta) {
+            console.log(`Dados recebidos: kpi faixa`, resposta);
+            var kpi_3 = resposta[0].faixa
+            kpi3.innerHTML = kpi_3;
+          });
+        } else {
+          console.error("Nenhum dado encontrado ou erro na API da kpi 3");
+        }
+      })
+      .catch(function (error) {
+        console.error(
+          `Erro na obtenção dos dados p/ gráfico: ${error.message}`
+        );
+      });
+  }
 </script>
