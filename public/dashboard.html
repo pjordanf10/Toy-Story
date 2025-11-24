@@ -19,16 +19,10 @@
         <div class="campos">
           <div class="campos1">
             <div class="perfil">
-              <div>B</div>
+              <div><img src="./style/img/icons/logo.png" alt="Toy-Story"></div>
             </div>
             <div class="bem_vindo">Bem-vindo
               <span id="boas_vindas"></span>
-            </div>
-            <div class="seu_espaco">
-              <a href="">Seu espaço</a>
-            </div>
-            <div class="quiz">
-              <a href="">Quiz</a>
             </div>
           </div>
           <div class="sair">
@@ -39,6 +33,7 @@
 
       <div class="dash">
         <div class="parte_cima">
+          <div class="cima_dash">
           <div class="titulo">Sua Dashboard</div>
 
           <div class="kpi">
@@ -51,6 +46,7 @@
             <span id="kpi3">
 
             </span>
+          </div>
           </div>
 
           <div class="dashboard">
@@ -85,7 +81,7 @@
     obterDadosGrafico_kpi()
   }
 
-  boas_vindas.innerHTML = sessionStorage.NOME_USUARIO;
+  boas_vindas.innerHTML = sessionStorage.NOME;
 
   // O gráfico é construído com três funções:
   // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
@@ -167,13 +163,6 @@
       }
     });
   }
-
-  // Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
-  // buscando a última medida inserida em tabela contendo as capturas,
-
-  //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
-  //     Para ajustar o "select", ajuste o comando sql em src/models
-
   function obterDadosGrafico2() {
     fetch(`/dash/filme`, { cache: "no-store" })
       .then(function (response) {

@@ -299,14 +299,7 @@ body {
 
 .navbar_dash .perfil div {
     display: flex;
-    align-items: center;
     justify-content: center;
-    background-color: black;
-    border-radius: 100%;
-    color: white;
-    width: 65px;
-    height: 65px;
-    font-size: 20px;
 }
 
 .campos1 .bem_vindo {
@@ -367,4 +360,16 @@ body {
     width: 590px;
     margin-left: 30px;
     margin-bottom: 30px;
+}
+
+.dash .kpi {
+    display: flex;
+    justify-content: center;
+    gap: 70px;
+}
+
+.cima_dash {
+    display: flex;
+    gap: 76px;
+    flex-direction: column;
 }
