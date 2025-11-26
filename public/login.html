@@ -94,15 +94,8 @@
         var senhaVar = senha_input.value;
 
         if (emailVar == "" || senhaVar == "") {
-            // cardErro.style.display = "block"
-            // mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
-            // finalizarAguardar();
             return false;
         }
-        // else {
-        //     setInterval(sumirMensagem, 5000)
-        // }
-
         console.log("FORM LOGIN: ", emailVar);
         console.log("FORM SENHA: ", senhaVar);
 
@@ -129,9 +122,7 @@
                     sessionStorage.ID_USUARIO = json.id_usuario;
                     sessionStorage.PERSONAGEM = json.personagem_favorito;
 
-                    // setTimeout(function () {
                         window.location = "./dashboard.html";
-                    // }, 1000); // apenas para exibir o loading
 
                 });
 
@@ -141,7 +132,6 @@
 
                 resposta.text().then(texto => {
                     console.error(texto);
-                    // finalizarAguardar(texto);
                 });
             }
 
@@ -151,9 +141,5 @@
 
         return false;
     }
-
-    // function sumirMensagem() {
-    //     cardErro.style.display = "none"
-    // }
 
 </script>

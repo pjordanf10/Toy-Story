@@ -144,11 +144,7 @@
     senha_mensagem.innerHTML = msg;
   }
 
-  // Array para armazenar empresas cadastradas para validação de código de ativação 
-  // let listaEmpresasCadastradas = [];
-
   function cadastrar() {
-    // aguardar();
 
     // Agora vá para o método fetch logo abaixo
     var nomeVar = nome_input.value;
@@ -200,7 +196,6 @@
         emailServer: emailVar,
         dt_nascimentoServer: dt_nascimentoVar,
         senhaServer: senhaVar,
-        // idEmpresaVincularServer: idEmpresaVincular
       }),
     })
       .then(function (resposta) {
@@ -225,7 +220,4 @@
 
     return false;
   }
-
-
-  // function puxaridu()
 </script>
