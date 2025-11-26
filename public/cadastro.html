@@ -39,17 +39,17 @@
         </div>
         <div class="campos">
           <div>
-            <p>Nome:</p> <span id="*"></span>
+            <p>Nome:</p> 
             <input type="text" id="nome_input" placeholder="Buzz" />
             <br /><br />
           </div>
           <div>
-            <p>Sobrenome:</p> <span id="*"></span>
+            <p>Sobrenome:</p> 
             <input type="text" id="sobrenome_input" placeholder="Lightyear" />
             <br /><br />
           </div>
           <div>
-            <p>Personagem Favorito:</p> <span id="*"></span>
+            <p>Personagem Favorito:</p> 
             <select name="" id="personagem_select">
               <option value="*" disabled selected>Escolha um personagem</option>
               <option value="1">Wood</option>
@@ -64,7 +64,7 @@
             <br /><br />
           </div>
           <div>
-            <p>Filme Favorito:</p> <span id="*"></span>
+            <p>Filme Favorito:</p> 
             <select name="" id="filme_select">
               <option value="*" disabled selected>Selecione um filme</option>
               <option value="1">Toy Story 1</option>
@@ -75,22 +75,24 @@
             <br /><br />
           </div>
           <div>
-            <p>E-mail:</p> <span id="*"></span>
+            <p>E-mail:</p> 
             <input type="text" id="email_input" placeholder="buzz@gmail.com" />
             <br /><br />
           </div>
           <div>
-            <p>Data de Nascimento:</p> <span id="*"></span>
+            <p>Data de Nascimento:</p> 
             <input type="date" id="dt_nascimento_input" placeholder="22/12/1995" />
             <br /><br />
           </div>
-          <div>
-            <p>Senha:</p> <span id="*"></span>
-            <input type="text" id="senha_input" placeholder="********" />
-            <br /><br />
+          <div class="senha">
+            <p>Senha:</p> 
+            <input oninput="verificarSenha()" type="text" id="senha_input" placeholder="********" />
+            
+            <br />
+            <span class="senha_mensagem" id="senha_mensagem"></span> <br>
           </div>
           <div>
-            <p>Confirmar senha:</p> <span id="*"></span>
+            <p>Confirmar senha:</p> 
             <input type="text" id="confirmar_input" placeholder="********" />
             <br /><br />
           </div>
@@ -116,13 +118,38 @@
 
 <script>
 
+  var listaCaracteres = ['!', '@', '#', '$', '%', '&', '*', 1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+
+  function verificarSenha() {
+    
+    var senha = senha_input.value;
+    var msg = "";
+    var temCaracter = false;
+
+    for (var i = 0; i < listaCaracteres.length; i++) {
+      if (senha.includes(listaCaracteres[i])) {
+        temCaracter = true;
+      }
+    }
+
+    if (temCaracter) {
+        msg = `Senha Forte`;
+        senha_mensagem.style.color = "green";
+        temCaracter = true;
+      } else {
+        msg = `Senha Fraca`;
+        senha_mensagem.style.color = "red";
+      }
+
+    senha_mensagem.innerHTML = msg;
+  }
+
   // Array para armazenar empresas cadastradas para validação de código de ativação 
   // let listaEmpresasCadastradas = [];
 
   function cadastrar() {
     // aguardar();
 
-    //Recupere o valor da nova input pelo nome do id
     // Agora vá para o método fetch logo abaixo
     var nomeVar = nome_input.value;
     var sobrenomeVar = sobrenome_input.value;
@@ -132,8 +159,6 @@
     var dt_nascimentoVar = dt_nascimento_input.value;
     var senhaVar = senha_input.value;
     var confirmacaoSenhaVar = confirmar_input.value;
-    // var codigoVar = codigo_input.value;
-    // var idEmpresaVincular
 
     if (nomeVar.length < 3) {
 
@@ -158,22 +183,6 @@
       // finalizarAguardar();
       return false;
     }
-    //  else {
-    //   setInterval(sumirMensagem, 5000);
-    // }
-
-    // Verificando se o código de ativação é de alguma empresa cadastrada
-    // for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
-    //   if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
-    //     idEmpresaVincular = listaEmpresasCadastradas[i].id
-    //     console.log("Código de ativação válido.");
-    //     break;
-    //   } else {
-    //     cardErro.style.display = "block";
-    //     mensagem_erro.innerHTML = "(Mensagem de erro para código inválido)";
-    //     finalizarAguardar();
-    //   }
-    // }
 
     // Enviando o valor da nova input
     fetch("/usuarios/cadastrar", {
@@ -198,11 +207,7 @@
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
-          // cardErro.style.display = "block";
-
-          // mensagem_erro.innerHTML =
-          //   "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
-
+          // func puxar cdados()
           // setTimeout(() => {
             window.location = "login.html";
           // }, "2000");
@@ -221,27 +226,6 @@
     return false;
   }
 
-  // Listando empresas cadastradas 
-  // function listar() {
-  //   fetch("/empresas/listar", {
-  //     method: "GET",
-  //   })
-  //     .then(function (resposta) {
-  //       resposta.json().then((empresas) => {
-  //         empresas.forEach((empresa) => {
-  //           listaEmpresasCadastradas.push(empresa);
 
-  //           console.log("listaEmpresasCadastradas")
-  //           console.log(listaEmpresasCadastradas[0].codigo_ativacao)
-  //         });
-  //       });
-  //     })
-  //     .catch(function (resposta) {
-  //       console.log(`#ERRO: ${resposta}`);
-  //     });
-  // }
-
-  // function sumirMensagem() {
-  //   cardErro.style.display = "none";
-  // }
+  // function puxaridu()
 </script>
